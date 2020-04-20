@@ -28,9 +28,9 @@ struct ContentViews: View {
         
         List {
             ForEach(posts, id: \.id) { post in
-                HStack (alignment: .center) {
+                HStack {
                     VStack (alignment: .leading) {
-                        Text("\(post.title)")
+                        Text("\(post.title)").font(.headline)
                         Text("Sets: \(post.setsNum)")
                         Text("Reps: \(post.repsNum)")
                         HStack {
@@ -38,15 +38,18 @@ struct ContentViews: View {
                             Text("\(post.time) min")
                         }
                     }.padding(.leading, 8)
-                    .background(Color.red)
+                    
                     
                     Image("pushup")
                         .resizable()
-                        .frame(width: 130, height: 100)
+                        .frame(width: 110, height: 100)
                         
                     
                     
-                }
+                    }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity, alignment: .topLeading)
+                .background(Color.red)
+                .cornerRadius(10)
                 
                 
             }
