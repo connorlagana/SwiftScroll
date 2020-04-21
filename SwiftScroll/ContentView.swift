@@ -28,25 +28,29 @@ struct ContentViews: View {
         
         List {
             ForEach(posts, id: \.id) { post in
-                HStack {
-                    VStack (alignment: .leading) {
-                        Text("\(post.title)").font(.headline)
-                        Text("Sets: \(post.setsNum)")
-                        Text("Reps: \(post.repsNum)")
-                        HStack {
-                            Image("time")
-                            Text("\(post.time) min")
+                VStack (alignment: .leading) {
+                    Text("\(post.title)").font(.largeTitle).foregroundColor(.white)
+                    HStack {
+                        VStack (alignment: .leading) {
+                            Text("Sets: \(post.setsNum)").padding(.top, 20).foregroundColor(.white)
+                            Text("Reps: \(post.repsNum)").foregroundColor(.white)
+                            HStack {
+                                Image("time")
+                                Text("\(post.time) min").foregroundColor(.white)
+                            }
                         }
-                    }.padding(.leading, 8)
-                    
-                    
-                    Image("pushup")
+                        Image("pushup")
                         .resizable()
                         .frame(width: 110, height: 100)
                         
+                    }.padding(.leading, 8)
                     
                     
-                    }
+                    
+                        
+                    
+                    
+                }.padding(.leading, 10)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity, alignment: .topLeading)
                 .background(Color.red)
                 .cornerRadius(10)
