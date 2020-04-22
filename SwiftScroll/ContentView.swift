@@ -26,6 +26,16 @@ struct ContentViews: View {
     
     var body: some View {
         
+        VStack (alignment: .leading) {
+            Text("Fit Flex")
+                .font(.headline)
+                .padding(.leading, 20)
+                
+            Text("Exercises: 14")
+                .padding(.leading, 20)
+                .font(.body)
+        
+        
         List {
             ForEach(posts, id: \.id) { post in
                 VStack (alignment: .leading) {
@@ -54,9 +64,8 @@ struct ContentViews: View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity, alignment: .topLeading)
                 .background(Color.red)
                 .cornerRadius(10)
-                
-                
             }
+        }
         }
     }
 }
