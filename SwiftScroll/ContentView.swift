@@ -31,9 +31,16 @@ struct ContentViews: View {
                 .font(.headline)
                 .padding(.leading, 20)
                 
-            Text("Exercises: 14")
+            HStack {
+                Text("Exercises: 14")
                 .padding(.leading, 20)
                 .font(.body)
+                
+                Image("plus")
+                    .resizable()
+                    .frame(width: 24, height: 24, alignment: .trailing)
+            }
+            
         
         
         List {
