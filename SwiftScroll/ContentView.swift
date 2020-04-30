@@ -56,9 +56,12 @@ struct ContentViews: View {
                                 Text("\(post.time) min").foregroundColor(.white)
                             }
                         }
-                        Image("pushup")
-                        .resizable()
-                        .frame(width: 110, height: 100)
+                        ZStack {
+                            Image("pushup")
+                            .resizable()
+                            .frame(width: 110, height: 100)
+                        }.frame(width: 200)
+                        
                         
                     }.padding(.leading, 8)
                     
@@ -72,7 +75,7 @@ struct ContentViews: View {
                 .background(Color.red)
                 .cornerRadius(10)
             }
-        }
+        }.padding(.top, 18)
         }
     }
 }
