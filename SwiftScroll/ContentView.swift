@@ -32,7 +32,14 @@ let colors: [[Color]] = [[color1, color2], [color3, color4], [color5, color6], [
 
 struct ContentViews: View {
     
-    
+    let popEx: [Post] = [
+        .init(id: 0, setsNum: 8, repsNum: 25, time: 12, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .bottomLeading, endPoint: .topTrailing)),
+    .init(id: 1, setsNum: 8, repsNum: 25, time: 12, title: "Pullups", gradient: LinearGradient(gradient: Gradient(colors: [color3, color4]), startPoint: .bottomLeading, endPoint: .topTrailing)),
+    .init(id: 2, setsNum: 8, repsNum: 25, time: 12, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color11, color12]), startPoint: .bottomLeading, endPoint: .topTrailing)),
+    .init(id: 3, setsNum: 8, repsNum: 25, time: 12, title: "Squats", gradient: LinearGradient(gradient: Gradient(colors: [color5, color6]), startPoint: .bottomLeading, endPoint: .topTrailing)),
+    .init(id: 4, setsNum: 8, repsNum: 25, time: 12, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color7, color8]), startPoint: .bottomLeading, endPoint: .topTrailing)),
+    .init(id: 5, setsNum: 8, repsNum: 25, time: 12, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color9, color10]), startPoint: .bottomLeading, endPoint: .topTrailing)),
+    ]
     
     let posts: [Post] = [
         .init(id: 0, setsNum: 8, repsNum: 25, time: 12, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .bottomLeading, endPoint: .topTrailing)),
@@ -52,12 +59,45 @@ struct ContentViews: View {
         NavigationView {
             List {
                 VStack (alignment: .leading) {
-                    Text("hello world")
+                    Text("Stories").font(.headline)
+                    ScrollView (.horizontal, showsIndicators: false) {
+                        
+                        VStack {
+                            HStack {
+                            ForEach(popEx, id: \.id) { ex in
+                                NavigationLink(destination: ExerciseDetailView(exercise: ex)) {
+                                    ShortExerciseView(exercise: ex)
+                                }
+                                
+                                }
+                            }
+                        }
+                    }.frame(height: 130).padding(.leading, -15).padding(.trailing, -15)
                 }
             }
+            .navigationBarTitle(Text("FitFlex"))
+            .foregroundColor(.black)
             
-        }.navigationBarTitle(Text("Fit Flex")).background(Color.red)
+        }
         
+    }
+}
+
+struct ShortExerciseView: View {
+    var exercise: Post
+    var body: some View {
+        Text("\(exercise.title)").frame(width: 100, height: 50).background(Color.red).cornerRadius(40)
+    }
+}
+
+struct ExerciseDetailView: View {
+    let exercise: Post
+//    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+//    let rand = Int(arc4random_uniform(UInt32(backs.count)))
+    
+    var body: some View {
+        Text("Pushups")
     }
 }
 
