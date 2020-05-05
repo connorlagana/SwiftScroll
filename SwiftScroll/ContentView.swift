@@ -44,40 +44,19 @@ struct ContentViews: View {
     
     ]
     
+    init() {
+        UITableView.appearance().separatorColor = .clear
+    }
+    
     var body: some View {
         NavigationView {
             List {
                 VStack (alignment: .leading) {
-                    Text("Popular Exercises").font(.headline)
-                    ScrollView (.horizontal, showsIndicators: false) {
-                        
-                        VStack {
-                            HStack {
-                            
-                            }
-                        }
-                    }.frame(height: 130).padding(.leading, -15).padding(.trailing, -15)
-                    HStack {
-                        Text("Exercises: 14")
-                        .padding(.leading, 20)
-                        .font(.body)
-                        
-                        Image("plus")
-                            .resizable()
-                            .frame(width: 24, height: 24, alignment: .trailing)
-                    }
-                    
-                
-                
-                List {
-                    ForEach(posts, id: \.id) { post in
-                        ExerciseView(post: post)
-                    }
-                }.padding(.top, 18)
+                    Text("hello world")
                 }
             }
             
-        }.navigationBarTitle(Text("Fit Flex"))
+        }.navigationBarTitle(Text("Fit Flex")).background(Color.red)
         
     }
 }
@@ -119,6 +98,8 @@ struct ExerciseView: View {
         .cornerRadius(10)
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
