@@ -59,7 +59,7 @@ struct ContentViews: View {
         NavigationView {
             List {
                 VStack (alignment: .leading) {
-                    Text("Stories").font(.headline)
+                    Text("Popular Exercises").font(.headline)
                     ScrollView (.horizontal, showsIndicators: false) {
                         
                         VStack {
@@ -67,7 +67,7 @@ struct ContentViews: View {
                             ForEach(popEx, id: \.id) { ex in
                                 NavigationLink(destination: ExerciseDetailView(exercise: ex)) {
                                     ShortExerciseView(exercise: ex)
-                                }
+                                }.transition(.slide)
                                 
                                 }
                             }
@@ -97,7 +97,7 @@ struct ExerciseDetailView: View {
 //    let rand = Int(arc4random_uniform(UInt32(backs.count)))
     
     var body: some View {
-        Text("Pushups")
+        Text("\(exercise.title)")
     }
 }
 
