@@ -72,7 +72,7 @@ struct ContentViews: View {
                                 }
                             }
                         }
-                    }.frame(height: 130).padding(.leading, -15).padding(.trailing, -15)
+                    }.frame(height: 70).padding(.leading, -20).padding(.trailing, -20)
                 }
             }
             .navigationBarTitle(Text("FitFlex"))
