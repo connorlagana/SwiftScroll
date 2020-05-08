@@ -74,6 +74,12 @@ struct ContentViews: View {
                         }
                     }.frame(height: 70).padding(.leading, -20).padding(.trailing, -20)
                 }
+                
+                ForEach(posts, id: \.id) { post in
+                    NavigationLink(destination: ExerciseDetailView(exercise: post)) {
+                        ExerciseView(post: post)
+                    }
+                }
             }
             .navigationBarTitle(Text("FitFlex"))
             .foregroundColor(.black)
