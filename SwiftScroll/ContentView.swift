@@ -103,7 +103,22 @@ struct ExerciseDetailView: View {
 //    let rand = Int(arc4random_uniform(UInt32(backs.count)))
     
     var body: some View {
-        Text("\(exercise.title)")
+        VStack {
+            Text("\(exercise.title)")
+            ZStack (alignment: .bottom) {
+                
+                Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
+                //make this a gradient
+                Capsule().frame(width: 30, height: 150).foregroundColor(.yellow)
+            }
+            ZStack {
+                Image("pushup")
+                .resizable()
+                .frame(width: 210, height: 200)
+            }.frame(width: 300)
+            
+        }
+        
     }
 }
 
