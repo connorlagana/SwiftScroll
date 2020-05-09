@@ -98,17 +98,23 @@ struct ShortExerciseView: View {
 
 struct ExerciseDetailView: View {
     let exercise: Post
-//    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
 //    let rand = Int(arc4random_uniform(UInt32(backs.count)))
     
+    @State var timeRemaining = 30
+    
     var body: some View {
+        
+        
         VStack {
             Text("\(exercise.title)")
-            Button(action: {
-                print("hello world!!!")
-            }) {
-                Text("hi there buddy")
+            Text("\(timeRemaining)")
+            .onReceive(timer) { _ in
+                if self.timeRemaining > 0 {
+                    self.timeRemaining -= 1
+                }
             }
             ZStack (alignment: .bottom) {
                 
