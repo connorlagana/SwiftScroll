@@ -110,7 +110,21 @@ struct ExerciseDetailView: View {
         
         
         VStack {
-            Text("\(exercise.title)")
+            Text("\(exercise.title)").font(.system(size: 36))
+            HStack {
+                Button(action: {
+                    print("Starting...")
+                    
+                }) {
+                    Text("Start").foregroundColor(.red).font(.system(size: 20))
+                }
+                Button(action: {
+                    print("Stopping...")
+                }) {
+                    Text("Stop").foregroundColor(.red).font(.system(size: 20))
+                }
+            }
+            
             Text("\(timeRemaining)")
             .onReceive(timer) { _ in
                 if self.timeRemaining > 0 {
@@ -135,6 +149,39 @@ struct ExerciseDetailView: View {
             
         }
         
+    }
+}
+
+struct StopWatchButton : View {
+    var actions: [() -> Void]
+    var labels: [String]
+    var color: Color
+    var isPaused: Bool
+
+    
+    var body: some View {
+    let buttonWidth = (UIScreen.main.bounds.size.width / 2) - 12
+    
+    return Button(action: {
+            if self.isPaused {
+                self.actions[0]()
+            } else {
+                self.actions[1]()
+            }
+        }) {
+            if isPaused {
+                Text(self.labels[0])
+                    .foregroundColor(Color.white)
+                    .frame(width: buttonWidth,
+                           height: 50)
+            } else {
+                Text(self.labels[1])
+                    .foregroundColor(Color.white)
+                    .frame(width: buttonWidth,
+                           height: 50)
+            }
+        }
+        .background(self.color)
     }
 }
 
