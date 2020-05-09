@@ -15,6 +15,14 @@ struct  Post: Identifiable {
     let gradient: LinearGradient
 }
 
+extension AnyTransition {
+    static var moveAndFade: AnyTransition {
+        let insertion = AnyTransition.move(edge: .trailing).combined(with: .opacity)
+        let removal = AnyTransition.move(edge: .leading).combined(with: .opacity)
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
+}
+
 let color1: Color = Color.init(red: 72/255, green: 148/255, blue: 111/255)
 let color2: Color = Color.init(red: 167/255, green: 243/255, blue: 148/255)
 let color3: Color = Color.init(red: 50/255, green: 87/255, blue: 120/255)
@@ -55,24 +63,55 @@ struct ContentViews: View {
         UITableView.appearance().separatorColor = .clear
     }
     
+    @State private var showDetail = false
+    
     var body: some View {
         NavigationView {
             List {
                 VStack (alignment: .leading) {
-                    Text("Popular Exercises").font(.headline)
-                    ScrollView (.horizontal, showsIndicators: false) {
-                        
-                        VStack {
-                            HStack {
-                            ForEach(popEx, id: \.id) { ex in
-                                NavigationLink(destination: ExerciseDetailView(exercise: ex)) {
-                                    ShortExerciseView(exercise: ex)
-                                }.transition(.slide)
-                                
+                    HStack {
+                        Text("Popular Exercises").font(.headline)
+                        Spacer()
+                        Button(action: {
+                            withAnimation {
+                                self.showDetail.toggle()
+                            }
+                            
+                        }) {
+                            Image(systemName: "chevron.right.circle")
+                                .imageScale(.large)
+                                .rotationEffect(.degrees(showDetail ? 90 : 0))
+                                .scaleEffect(showDetail ? 1.25 : 1)
+                                .padding()
+                        }
+                    }
+                    if showDetail {
+                        ScrollView (.horizontal, showsIndicators: false) {
+                            
+                            VStack {
+                                HStack {
+                                ForEach(popEx, id: \.id) { ex in
+                                    NavigationLink(destination: ExerciseDetailView(exercise: ex)) {
+                                        ShortExerciseView(exercise: ex)
+                                    }.transition(.slide)
+                                    
+                                    }
                                 }
                             }
-                        }
-                    }.frame(height: 70).padding(.leading, -20).padding(.trailing, -20)
+                        }.frame(height: 70).padding(.leading, -20).padding(.trailing, -20).transition(.moveAndFade)
+                    }
+                    
+                    else {
+                        HStack {
+                            Spacer()
+                            Text("Welcome!")
+                            Spacer()
+                        }.frame(height: 74).transition(.moveAndFade)
+                        
+                        
+                    }
+                    
+                    
                 }
                 
                 ForEach(posts, id: \.id) { post in
@@ -84,6 +123,7 @@ struct ContentViews: View {
             .navigationBarTitle(Text("FitFlex"))
             .foregroundColor(.black)
             
+            
         }
         
     }
@@ -92,9 +132,12 @@ struct ContentViews: View {
 struct ShortExerciseView: View {
     var exercise: Post
     var body: some View {
-        Text("\(exercise.title)").frame(width: 100, height: 50).background(Color.red).cornerRadius(40)
+        Text("\(exercise.title)").frame(width: 100, height: 50).background(LinearGradient(gradient: Gradient(colors: [colors[4][0], colors[4][1]]), startPoint: .bottomLeading, endPoint: .topTrailing))
+            .cornerRadius(40)
     }
 }
+
+
 
 struct ExerciseDetailView: View {
     let exercise: Post
@@ -114,12 +157,13 @@ struct ExerciseDetailView: View {
             HStack {
                 Button(action: {
                     print("Starting...")
-                    
+
                 }) {
                     Text("Start").foregroundColor(.red).font(.system(size: 20))
                 }
                 Button(action: {
                     print("Stopping...")
+                    self.timer
                 }) {
                     Text("Stop").foregroundColor(.red).font(.system(size: 20))
                 }
@@ -129,6 +173,9 @@ struct ExerciseDetailView: View {
             .onReceive(timer) { _ in
                 if self.timeRemaining > 0 {
                     self.timeRemaining -= 1
+                }
+                else {
+//                    self.timeRemaining = 15
                 }
             }
             ZStack (alignment: .bottom) {
@@ -152,7 +199,7 @@ struct ExerciseDetailView: View {
     }
 }
 
-struct StopWatchButton : View {
+struct StopWatchButton: View {
     var actions: [() -> Void]
     var labels: [String]
     var color: Color
@@ -189,7 +236,7 @@ struct ExerciseView: View {
     
     let post: Post
     
-    let rand = Int(arc4random_uniform(UInt32(6)))
+//    let rand = Int(arc4random_uniform(UInt32(6)))
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -220,7 +267,7 @@ struct ExerciseView: View {
             
         }.padding(.leading, 10)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity, alignment: .topLeading)
-            .background(LinearGradient(gradient: Gradient(colors: [colors[rand][0], colors[rand][1]]), startPoint: .bottomLeading, endPoint: .topTrailing))
+            .background(LinearGradient(gradient: Gradient(colors: [colors[3][0], colors[3][1]]), startPoint: .bottomLeading, endPoint: .topTrailing))
         .cornerRadius(10)
     }
 }
