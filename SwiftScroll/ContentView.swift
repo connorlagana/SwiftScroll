@@ -33,7 +33,7 @@ let colors: [[Color]] = [[color1, color2], [color3, color4], [color5, color6], [
 struct ContentViews: View {
     
     let popEx: [Post] = [
-        .init(id: 0, setsNum: 8, repsNum: 25, time: 12, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .bottomLeading, endPoint: .topTrailing)),
+        .init(id: 0, setsNum: 8, repsNum: 25, time: 30, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .bottomLeading, endPoint: .topTrailing)),
     .init(id: 1, setsNum: 8, repsNum: 25, time: 12, title: "Pullups", gradient: LinearGradient(gradient: Gradient(colors: [color3, color4]), startPoint: .bottomLeading, endPoint: .topTrailing)),
     .init(id: 2, setsNum: 8, repsNum: 25, time: 12, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color11, color12]), startPoint: .bottomLeading, endPoint: .topTrailing)),
     .init(id: 3, setsNum: 8, repsNum: 25, time: 12, title: "Squats", gradient: LinearGradient(gradient: Gradient(colors: [color5, color6]), startPoint: .bottomLeading, endPoint: .topTrailing)),
@@ -42,7 +42,7 @@ struct ContentViews: View {
     ]
     
     let posts: [Post] = [
-        .init(id: 0, setsNum: 8, repsNum: 25, time: 12, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .bottomLeading, endPoint: .topTrailing)),
+        .init(id: 0, setsNum: 8, repsNum: 25, time: 30, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .bottomLeading, endPoint: .topTrailing)),
     .init(id: 1, setsNum: 8, repsNum: 25, time: 12, title: "Pullups", gradient: LinearGradient(gradient: Gradient(colors: [color3, color4]), startPoint: .bottomLeading, endPoint: .topTrailing)),
     .init(id: 2, setsNum: 8, repsNum: 25, time: 12, title: "Pushups", gradient: LinearGradient(gradient: Gradient(colors: [color11, color12]), startPoint: .bottomLeading, endPoint: .topTrailing)),
     .init(id: 3, setsNum: 8, repsNum: 25, time: 12, title: "Squats", gradient: LinearGradient(gradient: Gradient(colors: [color5, color6]), startPoint: .bottomLeading, endPoint: .topTrailing)),
@@ -105,6 +105,11 @@ struct ExerciseDetailView: View {
     var body: some View {
         VStack {
             Text("\(exercise.title)")
+            Button(action: {
+                print("hello world!!!")
+            }) {
+                Text("hi there buddy")
+            }
             ZStack (alignment: .bottom) {
                 
                 Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
@@ -123,6 +128,7 @@ struct ExerciseDetailView: View {
 }
 
 struct ExerciseView: View {
+    
     let post: Post
     
     let rand = Int(arc4random_uniform(UInt32(6)))
@@ -136,7 +142,8 @@ struct ExerciseView: View {
                     Text("Reps: \(post.repsNum)").foregroundColor(.white)
                     HStack {
                         Image("time")
-                        Text("\(post.time) min").foregroundColor(.white)
+                        //change 30 secs to 30 * reps * sets to minutes
+                        Text("\(post.time) sec").foregroundColor(.white)
                     }
                 }
                 ZStack {
