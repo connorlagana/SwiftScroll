@@ -147,7 +147,9 @@ struct ExerciseDetailView: View {
 //    let rand = Int(arc4random_uniform(UInt32(backs.count)))
     
     @State var timeRemaining = 10
+    @State var restTimeRemaining = 20
     let timeTotal: CGFloat = 10
+    let restTimeTotal: CGFloat = 20
     
     var body: some View {
         
@@ -169,26 +171,59 @@ struct ExerciseDetailView: View {
                 }
             }
             
-            Text("\(timeRemaining)")
-            .onReceive(timer) { _ in
-                if self.timeRemaining > 0 {
-                    self.timeRemaining -= 1
+            if self.timeRemaining > 0 {
+                Text("\(timeRemaining)")
+                .onReceive(timer) { _ in
+                    if self.timeRemaining > 0 {
+                        self.timeRemaining -= 1
+                    }
+                    else {
+                        self.timeRemaining = 10
+                    }
                 }
-                else {
-                    self.timeRemaining = 10
+            }
+                
+            else if self.timeRemaining == 0{
+                Text("\(restTimeRemaining)").onReceive(timer) { _ in
+                    if self.restTimeRemaining > 0 {
+                        self.restTimeRemaining -= 1
+                    }
+                    else {
+                        self.restTimeRemaining = 10
+                    }
                 }
             }
             
+            else {
+                Text("\(restTimeRemaining)")
+                .onReceive(timer) { _ in
+                    if self.timeRemaining > 0 {
+                        self.restTimeRemaining -= 1
+                    }
+                    else {
+                        self.restTimeRemaining = 10
+                    }
+                }
+            }
+            
+            
+            
                 HStack {
+                    
+                    //Rest Capsule
                     ZStack (alignment: .bottom) {
                         Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
                         //make this a gradient
-                        if self.timeRemaining > 0 {
-                            Capsule().frame(width: 30, height: 200*((self.timeTotal-CGFloat(self.timeRemaining))/(self.timeTotal))).foregroundColor(.yellow)                }
+                        if self.restTimeRemaining > 0 {
+                            Capsule().frame(width: 30, height: 200*((self.restTimeTotal-CGFloat(self.restTimeRemaining))/(self.restTimeTotal))).foregroundColor(.yellow)
+                            
+                        }
                         else {
                             Capsule().frame(width: 30, height: 200).foregroundColor(.yellow)
                         }
                     }.animation(.default)
+                    
+                    //Pushup capsule
                     ZStack (alignment: .bottom) {
                         Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
                         //make this a gradient
