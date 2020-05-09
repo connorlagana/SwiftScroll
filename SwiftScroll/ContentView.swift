@@ -103,7 +103,8 @@ struct ExerciseDetailView: View {
     
 //    let rand = Int(arc4random_uniform(UInt32(backs.count)))
     
-    @State var timeRemaining = 30
+    @State var timeRemaining = 10
+    let timeTotal: CGFloat = 10
     
     var body: some View {
         
@@ -120,8 +121,12 @@ struct ExerciseDetailView: View {
                 
                 Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
                 //make this a gradient
-                Capsule().frame(width: 30, height: 150).foregroundColor(.yellow)
-            }
+                if self.timeRemaining > 0 {
+                    Capsule().frame(width: 30, height: 200*((self.timeTotal-CGFloat(self.timeRemaining))/(self.timeTotal))).foregroundColor(.yellow)                }
+                else {
+                    Capsule().frame(width: 30, height: 200).foregroundColor(.yellow)
+                }
+            }.animation(.default)
             ZStack {
                 Image("pushup")
                 .resizable()
