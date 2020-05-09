@@ -175,19 +175,34 @@ struct ExerciseDetailView: View {
                     self.timeRemaining -= 1
                 }
                 else {
-//                    self.timeRemaining = 15
+                    self.timeRemaining = 10
                 }
             }
-            ZStack (alignment: .bottom) {
-                
-                Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
-                //make this a gradient
-                if self.timeRemaining > 0 {
-                    Capsule().frame(width: 30, height: 200*((self.timeTotal-CGFloat(self.timeRemaining))/(self.timeTotal))).foregroundColor(.yellow)                }
-                else {
-                    Capsule().frame(width: 30, height: 200).foregroundColor(.yellow)
+            
+                HStack {
+                    ZStack (alignment: .bottom) {
+                        Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
+                        //make this a gradient
+                        if self.timeRemaining > 0 {
+                            Capsule().frame(width: 30, height: 200*((self.timeTotal-CGFloat(self.timeRemaining))/(self.timeTotal))).foregroundColor(.yellow)                }
+                        else {
+                            Capsule().frame(width: 30, height: 200).foregroundColor(.yellow)
+                        }
+                    }.animation(.default)
+                    ZStack (alignment: .bottom) {
+                        Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
+                        //make this a gradient
+                        if self.timeRemaining > 0 {
+                            Capsule().frame(width: 30, height: 200*((self.timeTotal-CGFloat(self.timeRemaining))/(self.timeTotal))).foregroundColor(.yellow)                }
+                        else {
+                            Capsule().frame(width: 30, height: 200).foregroundColor(.yellow)
+                        }
+                    }.animation(.default)
+                    
                 }
-            }.animation(.default)
+                
+                
+            
             ZStack {
                 Image("pushup")
                 .resizable()
