@@ -146,10 +146,11 @@ struct ExerciseDetailView: View {
     
 //    let rand = Int(arc4random_uniform(UInt32(backs.count)))
     
-    @State var timeRemaining = 10
-    @State var restTimeRemaining = 20
-    let timeTotal: CGFloat = 10
-    let restTimeTotal: CGFloat = 20
+    @State var timeRemaining = 45
+    @State var restTimeRemaining = 15
+    @State var sets = 5
+    let timeTotal: CGFloat = 45
+    let restTimeTotal: CGFloat = 15
     
     var body: some View {
         
@@ -177,31 +178,17 @@ struct ExerciseDetailView: View {
                     if self.timeRemaining > 0 {
                         self.timeRemaining -= 1
                     }
-                    else {
-                        self.timeRemaining = 10
-                    }
                 }
             }
                 
-            else if self.timeRemaining == 0{
+            else if self.timeRemaining == 0 {
                 Text("\(restTimeRemaining)").onReceive(timer) { _ in
                     if self.restTimeRemaining > 0 {
                         self.restTimeRemaining -= 1
                     }
-                    else {
-                        self.restTimeRemaining = 10
-                    }
-                }
-            }
-            
-            else {
-                Text("\(restTimeRemaining)")
-                .onReceive(timer) { _ in
-                    if self.timeRemaining > 0 {
-                        self.restTimeRemaining -= 1
-                    }
-                    else {
-                        self.restTimeRemaining = 10
+                    else if self.restTimeRemaining == 0 {
+                        self.timeRemaining = Int(self.timeTotal)
+                        self.restTimeRemaining = Int(self.restTimeTotal)
                     }
                 }
             }
