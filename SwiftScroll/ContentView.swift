@@ -157,6 +157,7 @@ struct ExerciseDetailView: View {
         
         VStack {
             Text("\(exercise.title)").font(.system(size: 36))
+            Text("Sets: \(sets)").font(.system(size: 36))
             HStack {
                 Button(action: {
                     print("Starting...")
@@ -189,6 +190,7 @@ struct ExerciseDetailView: View {
                     else if self.restTimeRemaining == 0 {
                         self.timeRemaining = Int(self.timeTotal)
                         self.restTimeRemaining = Int(self.restTimeTotal)
+                        self.sets -= 1
                     }
                 }
             }
@@ -316,3 +318,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentViews()
     }
 }
+
