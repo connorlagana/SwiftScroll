@@ -206,7 +206,7 @@ struct ExerciseDetailView: View {
                         Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
                         //make this a gradient
                         if self.restTimeRemaining > 0 {
-                            Capsule().frame(width: 30, height: 200*((self.restTimeTotal-CGFloat(self.restTimeRemaining))/(self.restTimeTotal))).foregroundColor(.red))
+                            Capsule().frame(width: 30, height: 200*((self.restTimeTotal-CGFloat(self.restTimeRemaining))/(self.restTimeTotal))).foregroundColor(.red)
                             
                         }
                         else {
