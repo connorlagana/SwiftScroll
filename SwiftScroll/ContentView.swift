@@ -36,7 +36,9 @@ let color10: Color = Color.init(red: 255/255, green: 85/255, blue: 89/255)
 let color11: Color = Color.init(red: 213/255, green: 50/255, blue: 175/255)
 let color12: Color = Color.init(red: 250/255, green: 230/255, blue: 240/255)
 
-let colors: [[Color]] = [[color1, color2], [color3, color4], [color5, color6], [color7, color8], [color9, color10], [color11, color12]]
+let mainColor = Color.init(red: 242/255, green: 158/255, blue: 116/255)
+
+let colors: [[Color]] = [[color1, color2], [color3, color4], [color5, color6],  [color7, color8], [color9, color10], [color11, color12]]
 
 struct ContentViews: View {
     
@@ -204,7 +206,7 @@ struct ExerciseDetailView: View {
                         Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
                         //make this a gradient
                         if self.restTimeRemaining > 0 {
-                            Capsule().frame(width: 30, height: 200*((self.restTimeTotal-CGFloat(self.restTimeRemaining))/(self.restTimeTotal))).foregroundColor(.yellow)
+                            Capsule().frame(width: 30, height: 200*((self.restTimeTotal-CGFloat(self.restTimeRemaining))/(self.restTimeTotal))).foregroundColor(.red))
                             
                         }
                         else {
