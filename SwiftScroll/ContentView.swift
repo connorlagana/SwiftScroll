@@ -148,10 +148,10 @@ struct ExerciseDetailView: View {
     
 //    let rand = Int(arc4random_uniform(UInt32(backs.count)))
     
-    @State var timeRemaining = 45
+    @State var timeRemaining = 10
     @State var restTimeRemaining = 15
     @State var sets = 5
-    let timeTotal: CGFloat = 45
+    let timeTotal: CGFloat = 10
     let restTimeTotal: CGFloat = 15
     
     var body: some View {
@@ -210,7 +210,7 @@ struct ExerciseDetailView: View {
                             
                         }
                         else {
-                            Capsule().frame(width: 30, height: 200).foregroundColor(.yellow)
+                            Capsule().frame(width: 30, height: 200).foregroundColor(.red)
                         }
                     }.animation(.default)
                     
@@ -219,9 +219,9 @@ struct ExerciseDetailView: View {
                         Capsule().frame(width: 30, height: 200).foregroundColor(Color(red: 226/255, green: 226/255, blue: 226/255))
                         //make this a gradient
                         if self.timeRemaining > 0 {
-                            Capsule().frame(width: 30, height: 200*((self.timeTotal-CGFloat(self.timeRemaining))/(self.timeTotal))).foregroundColor(.yellow)                }
+                            Capsule().frame(width: 30, height: 200*((self.timeTotal-CGFloat(self.timeRemaining))/(self.timeTotal))).foregroundColor(.green)                }
                         else {
-                            Capsule().frame(width: 30, height: 200).foregroundColor(.yellow)
+                            Capsule().frame(width: 30, height: 200).foregroundColor(.green)
                         }
                     }.animation(.default)
                     
